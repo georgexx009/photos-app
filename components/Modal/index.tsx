@@ -4,12 +4,12 @@ import { Button } from '@components/Button'
 
 interface ModalProps {
 	children: React.ReactNode
-	handleCloseModal: () => {}
+	handleCloseModal: () => void
 }
 
 export const Modal = ({ children, handleCloseModal }: ModalProps) => {
 	return (
-		<div className={styles.backgroundlayer}>
+		<div className={styles.backgroundLayer}>
 			<div className={styles.modalContainer}>
 				<div className={styles.modalBody}>
 					{children}

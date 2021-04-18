@@ -1,11 +1,17 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Modal } from '@components/Modal'
+import { PhotoForm } from '@components/PhotoForm'
+
 import styles from '@styles/Photos.module.scss'
 import { GetServerSideProps } from 'next'
 import prisma from '@lib/prisma'
 import { Photo } from '.prisma/client'
+import { useToggle } from '@hooks'
 
 export default function Photos({ photos }: { photos: Photo[] }) {
+  const { toggleVal: showModal, turnOff: closeModal, turnOn: openModal } = useToggle()
+
   return (
     <div className={styles.container}>
       <header>
@@ -14,13 +20,19 @@ export default function Photos({ photos }: { photos: Photo[] }) {
 
       <main>
         <div className={styles.controls}>
-          <Button handleClick={() => {}}>Add photo</Button>
+          <Button handleClick={openModal}>Add photo</Button>
         </div>
         <div>
           {photos.map(photo => (
             <p key={photo.id}>{photo.name}</p>
           ))}
         </div>
+
+        {showModal && (
+          <Modal handleCloseModal={closeModal}>
+            <PhotoForm />
+          </Modal>
+        )}
       </main>
 
       <footer className={styles.footer}>

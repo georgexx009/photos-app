@@ -23,7 +23,8 @@
       "@styles/*": ["styles/*"],
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
-      "@controllers/*": ["controllers/*"]
+      "@controllers/*": ["controllers/*"],
+      "@hooks": ["hooks"]
     }
   },
   "include": [
