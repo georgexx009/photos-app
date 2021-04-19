@@ -1,4 +1,6 @@
 import React from 'react'
+import { useMutation, useQuery } from 'react-query'
+
 import styles from './PhotoForm.module.scss'
 import { useForm } from '@hooks'
 import { Button } from '@components/Button'
@@ -13,11 +15,24 @@ const formInitialState: PhotoForm = {
 	name: ''
 }
 
+// http://locahost/3000/api/photos
+
 export const PhotoForm = () => {
 	const { formState, handleChangeFile, handleChange} = useForm<PhotoForm>({ initialState: formInitialState })
+	const mutation = useMutation((data: PhotoForm) => {
+		return fetch('http://localhost:3000/api/photos', {
+			method: 'POST',
+			body: data as unknown as BodyInit
+		})
+	})
 
-	const handleSubmit = () => {
+	// const { status, data, isLoading } = useQuery('testQuery', () => fetch('http://localhost:3000/api/hello'))
+
+
+
+	const handleSubmit = async () => {
 		console.log(formState)
+		mutation.mutate(formState)
 	}
 
 	return (
