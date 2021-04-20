@@ -3,7 +3,6 @@ import { Button } from '@components/Button'
 import { Modal } from '@components/Modal'
 import { PhotoForm } from '@components/PhotoForm'
 
-import styles from '@styles/Photos.module.scss'
 import { GetServerSideProps } from 'next'
 import prisma from '@lib/prisma'
 import { Photo } from '.prisma/client'
@@ -13,13 +12,13 @@ export default function Photos({ photos }: { photos: Photo[] }) {
   const { toggleVal: showModal, turnOff: closeModal, turnOn: openModal } = useToggle()
 
   return (
-    <div className={styles.container}>
-      <header>
+    <div className='container-page'>
+      <header className='p-8'>
         <h1>Photo list</h1>
       </header>
 
-      <main>
-        <div className={styles.controls}>
+      <main className='main'>
+        <div className='flex justify-end'>
           <Button handleClick={openModal}>Add photo</Button>
         </div>
         <div>
@@ -35,7 +34,7 @@ export default function Photos({ photos }: { photos: Photo[] }) {
         )}
       </main>
 
-      <footer className={styles.footer}>
+      <footer className="footer">
         By Georgexx009
       </footer>
     </div>

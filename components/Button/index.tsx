@@ -27,7 +27,7 @@ export const Button = ({
     // variant={variant}
     disabled={disabled}
     // size={size}
-    className={styles.btn}
+    className='btn'
     {...restProps}
   >
     {children}
