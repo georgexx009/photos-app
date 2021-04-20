@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './Modal.module.scss'
 import { Button } from '@components/Button'
 
 interface ModalProps {
@@ -9,9 +8,9 @@ interface ModalProps {
 
 export const Modal = ({ children, handleCloseModal }: ModalProps) => {
 	return (
-		<div className={styles.backgroundLayer}>
-			<div className={styles.modalContainer}>
-				<div className={styles.modalBody}>
+		<div className='column items-center full-screen bg-black bg-opacity-60 top-0 left-0 fixed'>
+			<div className='w-2/5 mt-36'>
+				<div className='relative my-0 mx-auto w-full bg-white rounded-lg border-gray-300 p-8'>
 					{children}
 					<Button handleClick={handleCloseModal}>Close</Button>
 				</div>

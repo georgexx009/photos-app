@@ -1,7 +1,6 @@
 import React from 'react'
 import { useMutation, useQuery } from 'react-query'
 
-import styles from './PhotoForm.module.scss'
 import { useForm } from '@hooks'
 import { Button } from '@components/Button'
 
@@ -36,9 +35,9 @@ export const PhotoForm = () => {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className='column justify-between h-full'>
 			<h3>Photo form</h3>
-			<div className={styles.body}>
+			<div className='column flex-grow p-8'>
 				<input type="file" name="photoFile" onChange={handleChangeFile} />
 				<input type="text" name="name" onChange={handleChange} value={formState.name} />
 
