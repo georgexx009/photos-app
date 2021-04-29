@@ -5,7 +5,7 @@ type DefaultBtnProps = Omit<JSX.IntrinsicElements['button'], 'type'>;
 
 export interface BtnProps extends DefaultBtnProps {
   children: React.ReactNode;
-  handleClick: () => void;
+  handleClick?: () => void;
   type?: string;
   variant?: 'primary' | 'secondary';
   ref?: ((instance: HTMLButtonElement) => void) | RefObject<HTMLButtonElement>;
@@ -14,7 +14,7 @@ export interface BtnProps extends DefaultBtnProps {
 
 export const Button = ({
   children,
-  handleClick,
+  handleClick = () => {},
   type,
   disabled,
   variant = 'primary',

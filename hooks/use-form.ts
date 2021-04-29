@@ -15,12 +15,17 @@ export const useForm = <T>({ initialState }: UseFormProps<T>) => {
 	}
 
 	const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
-		console.log(event.target.files)
+		if (!event.target.files?.length) {
+      return;
+    }
+
+		console.log('name: ', event.target.name)
+
+		
 		setFormState(prevState => ({
 			...prevState,
 			[event.target.name]: event.target.files
 		}))
-		console.log('handle finish')
 	}
 
 	return {
