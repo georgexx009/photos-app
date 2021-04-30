@@ -47,6 +47,7 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
     }
 
     const formData = new FormData();
+    console.log('files from input component: ', event.target.files[0])
 
     Array.from(event.target.files).forEach((file) => {
       formData.append(event.target.name, file);

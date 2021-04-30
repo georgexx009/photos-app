@@ -18,9 +18,6 @@ export const useForm = <T>({ initialState }: UseFormProps<T>) => {
 		if (!event.target.files?.length) {
       return;
     }
-
-		console.log('name: ', event.target.name)
-
 		
 		setFormState(prevState => ({
 			...prevState,

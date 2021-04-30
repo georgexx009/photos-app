@@ -23,8 +23,7 @@ export const PhotoForm = () => {
 	const { formState, handleChangeFile, handleChange} = useForm<PhotoForm>({ initialState: formInitialState })
 	const mutation = useMutation(async ({ formData }: { formData: FormData } ) => {
 		const config = {
-			headers: { 'content-type': 'multipart/form-data' },
-			validateStatus: (status) => true,
+			headers: { 'content-type': 'multipart/form-data' }
 		};
 		const response = await axios.post('/api/photos', formData, config);
 	
@@ -35,23 +34,20 @@ export const PhotoForm = () => {
 		const formData = new FormData();
 
 		Array.from(formState.theFiles).forEach((file: any) => {
-      formData.append('test', file);
+			console.log(file.name, file)
+      formData.append('theFiles', file);
     });
+
 		mutation.mutate({ formData })
 	}
 	
 	const onChange = async (formData: FormData) => {
-    // const response = await uploadFileRequest(formData, (event) => {
-    //   console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-    // });
 		mutation.mutate({ formData });
-
-    //console.log('response', response);
   };
 
 	return (
 		<div className='column justify-between h-full'>
-			<h3>Photo form</h3>
+			<h3>Photo form 2</h3>
 			<div className='column flex-grow p-8'>
 				<UiFileInputButton label="Upload Single File" uploadFileName="theFiles" onChange={onChange} />
 				

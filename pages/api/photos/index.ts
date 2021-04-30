@@ -32,6 +32,7 @@ const upload = multer({
 
 const apiRoute = nextConnect({
   onError(error, req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) {
+    console.log(error.message)
     res.status(501).json({ error: `Sorry something Happened! ${error.message}` });
   },
   onNoMatch(req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) {
@@ -45,17 +46,15 @@ apiRoute.post((req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) =
   const filenames = fs.readdirSync(outputFolderName);
   const images = filenames.map((name) => name);
 
-	const values = Object.values(req.files)
-  const promises = values.map(async (image: any) => {
-		const res = await cloudinary.uploader.upload(image.path, {
-			folder: 'photo_app',
-			public_id: 'test'
-		})
-		console.log(res)
-	})
+	// const values = Object.values(req.files)
+  // const promises = values.map(async (image: any) => {
+	// 	const res = await cloudinary.uploader.upload(image.path, {
+	// 		folder: 'photo_app',
+	// 		public_id: 'test'
+	// 	})
+	// })
   
-  Promise
-    .all(promises)
+  // Promise.all(promises)
 
   res.status(200).json({ data: images });
 });
@@ -65,4 +64,5 @@ export const config = {
     bodyParser: false, // Disallow body parsing, consume as stream
   },
 };
+
 export default apiRoute;
