@@ -1,7 +1,7 @@
-import cloudinary from '@lib/cloudinary';
+import { Cloudinary } from '@services/cloudinary'
+import { Multer } from '@lib/multer'
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
-import multer from 'multer';
 import fs from 'fs';
 import { ApiResponse } from '@types'
 
@@ -10,16 +10,8 @@ interface NextConnectApiRequest extends NextApiRequest {
 }
 type ResponseData = ApiResponse<string[], string>;
 
-const oneMegabyteInBytes = 1000000;
-const outputFolderName = './public/uploads';
-
-const upload = multer({
-  limits: { fileSize: oneMegabyteInBytes * 2 },
-  storage: multer.diskStorage({
-    destination: './public/uploads',
-    filename: (req, file, cb) => cb(null, file.originalname),
-  }),
-});
+const uploadMulter = new Multer()
+const cloudinary = new Cloudinary()
 
 const apiRoute = nextConnect({
   onError(error, req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) {
@@ -31,21 +23,13 @@ const apiRoute = nextConnect({
   },
 });
 
-apiRoute.use(upload.array('theFiles'));
+apiRoute.use(uploadMulter.saveMultipleFiles('theFiles'))
 
 apiRoute.post((req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) => {
-  const filenames = fs.readdirSync(outputFolderName);
+  const filenames = fs.readdirSync(uploadMulter.outputFolderName);
   const images = filenames.map((name) => name);
 
-	// const values = Object.values(req.files)
-  // const promises = values.map(async (image: any) => {
-	// 	const res = await cloudinary.uploader.upload(image.path, {
-	// 		folder: 'photo_app',
-	// 		public_id: 'test'
-	// 	})
-	// })
-  
-  // Promise.all(promises)
+	cloudinary.uploadFiles(req.files)
 
   res.status(200).json({ data: images });
 });

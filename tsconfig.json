@@ -24,6 +24,7 @@
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
       "@controllers/*": ["controllers/*"],
+      "@services/*": ["services/*"],
       "@types": ["types"],
       "@hooks": ["hooks"],
       "@request": ["utils/requests"]
