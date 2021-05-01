@@ -24,7 +24,9 @@
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
       "@controllers/*": ["controllers/*"],
-      "@hooks": ["hooks"]
+      "@types": ["types"],
+      "@hooks": ["hooks"],
+      "@request": ["utils/requests"]
     }
   },
   "include": [

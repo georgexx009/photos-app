@@ -3,11 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 import multer from 'multer';
 import fs from 'fs';
-
-type SuccessfulResponse<T> = { data: T; error?: never; statusCode?: number };
-type UnsuccessfulResponse<E> = { data?: never; error: E; statusCode?: number };
-
-type ApiResponse<T, E = unknown> = SuccessfulResponse<T> | UnsuccessfulResponse<E>;
+import { ApiResponse } from '@types'
 
 interface NextConnectApiRequest extends NextApiRequest {
   files: any;
@@ -23,11 +19,6 @@ const upload = multer({
     destination: './public/uploads',
     filename: (req, file, cb) => cb(null, file.originalname),
   }),
-  /*fileFilter: (req, file, cb) => {
-    const acceptFile: boolean = ['image/jpeg', 'image/png'].includes(file.mimetype);
-
-    cb(null, acceptFile);
-  },*/
 });
 
 const apiRoute = nextConnect({
