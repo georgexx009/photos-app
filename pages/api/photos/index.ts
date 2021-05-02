@@ -9,7 +9,7 @@ interface NextConnectApiRequest extends NextApiRequest {
   files: File[],
   body: PhotoMetaData
 }
-type ResponseData = ApiResponse<CloudinaryRes['UploadSuccess']>;
+type ResponseData = ApiResponse<PhotoMetaData>;
 
 const uploadMulter = new Multer()
 const cloudinary = new Cloudinary()
@@ -41,9 +41,8 @@ apiRoute.post(async (req: NextConnectApiRequest, res: NextApiResponse<ResponseDa
       photoOrientation: 'horizontal'
     }
   })
-  console.log(primsaRes)
-
-  res.status(200).json({ data: cloudinaryRes[0] });
+  
+  res.status(200).json({ data: primsaRes });
 });
 
 export const config = {
