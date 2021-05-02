@@ -1,5 +1,6 @@
 import { Cloudinary } from '@services/cloudinary'
 import { Multer } from '@lib/multer'
+import prisma from '@lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 import { ApiResponse, File, CloudinaryRes, PhotoMetaData } from '@types'
@@ -27,6 +28,20 @@ apiRoute.use(uploadMulter.saveMultipleFiles('theFiles'));
 
 apiRoute.post(async (req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) => {
 	const cloudinaryRes = await cloudinary.uploadFiles({ files: req.files, name: req.body.name });
+  const fileCreated = cloudinaryRes[0];
+
+  const primsaRes = await prisma.photo.create({
+    data: {
+      url: fileCreated.url,
+      name: req.body.name,
+      height: '350px',
+      width: '250px',
+      adjusmentView: 'height',
+      imagePosition: 'center',
+      photoOrientation: 'horizontal'
+    }
+  })
+  console.log(primsaRes)
 
   res.status(200).json({ data: cloudinaryRes[0] });
 });
