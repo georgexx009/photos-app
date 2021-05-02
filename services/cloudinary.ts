@@ -1,4 +1,5 @@
 import cloudinary from '@lib/cloudinary'
+import { CloudinaryRes } from '@types'
 
 export class Cloudinary {
 	private service
@@ -8,7 +9,7 @@ export class Cloudinary {
 		this.service = cloudinary
 	}
 
-	async uploadFiles(files: any) {
+	async uploadFiles(files: any): Promise<CloudinaryRes['UploadSuccess'][]> {
 		const values = Object.values(files)
 		const promises = values.map(async (image: any) => {
 			const res = await this.service.uploader.upload(image.path, {
