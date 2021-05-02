@@ -27,6 +27,7 @@ export const useForm = <T>({ initialState }: UseFormProps<T>) => {
 
 	return {
 		formState,
+		setFormState,
 		handleChange,
 		handleChangeFile
 	}

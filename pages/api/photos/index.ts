@@ -2,11 +2,11 @@ import { Cloudinary } from '@services/cloudinary'
 import { Multer } from '@lib/multer'
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
-import fs from 'fs';
-import { ApiResponse, File, CloudinaryRes } from '@types'
+import { ApiResponse, File, CloudinaryRes, PhotoMetaData } from '@types'
 
 interface NextConnectApiRequest extends NextApiRequest {
-  files: File[];
+  files: File[],
+  body: PhotoMetaData
 }
 type ResponseData = ApiResponse<CloudinaryRes['UploadSuccess']>;
 
@@ -23,10 +23,10 @@ const apiRoute = nextConnect({
   },
 });
 
-apiRoute.use(uploadMulter.saveMultipleFiles('theFiles'))
+apiRoute.use(uploadMulter.saveMultipleFiles('theFiles'));
 
 apiRoute.post(async (req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) => {
-	const cloudinaryRes = await cloudinary.uploadFiles(req.files)
+	const cloudinaryRes = await cloudinary.uploadFiles({ files: req.files, name: req.body.name });
 
   res.status(200).json({ data: cloudinaryRes[0] });
 });
