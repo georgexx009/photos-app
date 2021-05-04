@@ -68,6 +68,12 @@
     width: 100vw;
     height: 100vh;
   }
+
+  .select-border {
+    border-color: #d1d5db;
+    border-width: 1px;
+    border-radius: 0.375rem;
+  }
 }
 
 html,

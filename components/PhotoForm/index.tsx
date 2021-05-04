@@ -3,6 +3,8 @@ import { useMutation } from 'react-query'
 import { useForm } from '@hooks'
 import { uploadPhotoRequest } from '@request'
 import { Button } from '@components/Button'
+import { Dropdown } from '@components/Dropdown'
+import { photoFormProperties } from 'constants/photoForm'
 
 interface PhotoForm {
 	theFiles: any
