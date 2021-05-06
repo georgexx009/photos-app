@@ -29,7 +29,9 @@ export interface PhotoForm {
   label: string;
   placeholder?: string;
   type: 'text' | 'number' | 'dropdown';
+  value?: string;
   defaultValue?: string;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void;
   options?: string[];
 }
 

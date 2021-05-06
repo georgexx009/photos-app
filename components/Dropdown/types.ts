@@ -1,7 +1,8 @@
 export interface DropdownProps {
 	options: Option[];
-	setSelected: (value: string) => void;
-	defaultValue: string;
+	handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+	value: string;
+	defaultValue?: string;
 }
 
 export type Option = {
