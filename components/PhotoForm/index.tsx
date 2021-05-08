@@ -18,20 +18,19 @@ export const PhotoForm = () => {
 
 	const mutation = useMutation(async ({ formData }: { formData: FormData } ) => {
 		const response = await uploadPhotoRequest({ formData })
-		return response.data;
+		return response.data
 	})
 
 	const handleSubmit = async () => {
-		const formData = new FormData();
+		const formData = new FormData()
 
 		Array.from(formState.theFiles).forEach((file: any) => {
-      formData.append('theFiles', file);
-    });
+      formData.append('theFiles', file)
+    })
 
-		formData.set('name', formState.name);
-		console.log(formState)
+		formData.set('name', formState.name)
 
-		// mutation.mutate({ formData })
+		mutation.mutate({ formData })
 	}
 
 	const handleFileAndSaveName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,9 +43,9 @@ export const PhotoForm = () => {
 	}
 
 	return (
-		<div className='grid h-full' style={{ gridTemplateRows: 'auto 1fr auto'}}>
-			<h3>Photo form</h3>
-			<div className='column flex-grow p-8 overflow-y-auto'>
+		<div className='grid max-h-full' style={{ gridTemplateRows: 'auto 1fr auto'}}>
+			<h2 className="m-4">Photo form</h2>
+			<div className='column flex-grow p-4 lg:p-8 overflow-y-auto'>
 					<div className="py-2">
 						<div className="mb-6">
 							<input type="file" name="theFiles" onChange={handleFileAndSaveName} />
@@ -59,7 +58,7 @@ export const PhotoForm = () => {
 						}))}
 					</div>
 			</div>
-			<div className="w-2/3 flex justify-between mx-auto mt-4">
+			<div className="w-full lg:w-2/3 flex justify-between mx-auto mt-4">
 				<Button variant="secondary" handleClick={closeModal}>Close</Button>
 				<Button handleClick={handleSubmit}>Upload</Button>
 				</div>
