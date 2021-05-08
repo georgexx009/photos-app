@@ -11,7 +11,8 @@ export const photoFormProperties: PhotoForm[] = [
     name: 'name',
     label: 'Photo name',
     type: 'text',
-    placeholder: 'photo name'
+    placeholder: 'photo name',
+    clearBtn: true
   },
   {
     name: 'height',

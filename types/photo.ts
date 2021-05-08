@@ -35,6 +35,7 @@ export interface PhotoForm {
   defaultValue?: string;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void;
   options?: string[];
+  clearBtn?: boolean;
 }
 
 export interface PhotoFormState {

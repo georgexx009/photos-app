@@ -8,7 +8,8 @@ export const renderForm = {
     label,
     placeholder,
     value,
-    handleChange
+    handleChange,
+    clearBtn
   }: PhotoForm) => (
     <div className="mb-6" key={name}>
       <label
@@ -23,6 +24,7 @@ export const renderForm = {
         placeholder={placeholder}
         value={value}
         handleChange={handleChange}
+        clearBtn={clearBtn}
       />
     </div>
   ),

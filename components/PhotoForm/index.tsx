@@ -29,8 +29,8 @@ export const PhotoForm = () => {
     })
 
 		formData.set('name', formState.name)
-
 		mutation.mutate({ formData })
+		closeModal()
 	}
 
 	const handleFileAndSaveName = (event: React.ChangeEvent<HTMLInputElement>) => {
