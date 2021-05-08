@@ -22,6 +22,7 @@
     "paths": {
       "@styles/*": ["styles/*"],
       "@components/*": ["components/*"],
+      "@components": ["components"],
       "@lib/*": ["lib/*"],
       "@controllers/*": ["controllers/*"],
       "@services/*": ["services/*"],

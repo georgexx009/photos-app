@@ -7,6 +7,7 @@ import { GetServerSideProps } from 'next'
 import prisma from '@lib/prisma'
 import { Photo } from '.prisma/client'
 import { useToggle } from '@hooks'
+import { ModalProvider } from 'context/modalCtx'
 
 export default function Photos({ photos }: { photos: Photo[] }) {
   const { toggleVal: showModal, turnOff: closeModal, turnOn: openModal } = useToggle()
@@ -28,9 +29,15 @@ export default function Photos({ photos }: { photos: Photo[] }) {
         </div>
 
         {showModal && (
-          <Modal handleCloseModal={closeModal}>
-            <PhotoForm />
-          </Modal>
+          <ModalProvider value={{
+            openModal,
+            closeModal,
+            showModal
+          }}>
+            <Modal handleCloseModal={closeModal}>
+              <PhotoForm />
+            </Modal>
+          </ModalProvider>
         )}
       </main>
 

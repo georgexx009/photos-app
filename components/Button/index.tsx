@@ -27,7 +27,7 @@ export const Button = ({
     // variant={variant}
     disabled={disabled}
     // size={size}
-    className='btn'
+    className={`btn ${variant === 'secondary' ? 'bg-gray-600' : 'bg-green'}`}
     {...restProps}
   >
     {children}

@@ -56,7 +56,7 @@
     box-sizing: border-box;
     border: none;
     transition: background-color 0.5s ease;
-    background-color: #047857;
+    /* background-color: #047857; */
   }
 
   .column {
