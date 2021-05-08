@@ -1,3 +1,5 @@
+import { File } from './file'
+
 export interface PhotoMetaData {
 	name: string
 }
@@ -33,6 +35,16 @@ export interface PhotoForm {
   defaultValue?: string;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void;
   options?: string[];
+}
+
+export interface PhotoFormState {
+  theFiles: File[];
+  name: string;
+  height: string;
+  width: string;
+  adjusmentView: string;
+  imagePosition: string;
+  photoOrientation: string;
 }
 
 export interface Photo {

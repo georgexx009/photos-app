@@ -2,15 +2,15 @@ import React from 'react';
 import { PhotoForm } from '@types';
 import { Dropdown } from '@components/Dropdown';
 
-export const renders = {
+export const renderForm = {
   text: ({
     name,
     label,
     placeholder,
     value,
     handleChange
-  }: PhotoForm & { register: any }) => (
-    <div className="mb-6">
+  }: PhotoForm) => (
+    <div className="mb-6" key={name}>
       <label
         htmlFor={name}
         className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
@@ -33,8 +33,8 @@ export const renders = {
     name,
     handleChange,
     label
-  }: PhotoForm & { control: any }) => (
-    <div className="mb-6">
+  }: PhotoForm) => (
+    <div className="mb-6" key={name}>
       <label className="lbl" htmlFor={name}>
         {label}
       </label>
@@ -43,6 +43,7 @@ export const renders = {
             value: option,
             label: option
           }))}
+          name={name}
           value={value}
           handleChange={handleChange}
         />

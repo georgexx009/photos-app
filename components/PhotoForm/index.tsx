@@ -5,19 +5,14 @@ import { uploadPhotoRequest } from '@request'
 import { Button } from '@components/Button'
 import { Dropdown } from '@components/Dropdown'
 import { photoFormProperties } from 'constants/photoForm'
+import { renderForm } from './renderForm'
+import { PhotoFormState } from '@types'
+import { createInitialFormState } from './createInitialFormState'
 
-interface PhotoForm {
-	theFiles: any
-	name: string
-}
-
-const formInitialState: PhotoForm = {
-	theFiles: [],
-	name: ''
-}
+const formInitialState: PhotoFormState = createInitialFormState<PhotoFormState>({formProperties: photoFormProperties})
 
 export const PhotoForm = () => {
-	const { formState, setFormState, handleChangeFile, handleChange} = useForm<PhotoForm>({ initialState: formInitialState })
+	const { formState, setFormState, handleChangeFile, handleChange} = useForm<PhotoFormState>({ initialState: formInitialState })
 	
 	const mutation = useMutation(async ({ formData }: { formData: FormData } ) => {
 		const response = await uploadPhotoRequest({ formData })
@@ -32,8 +27,9 @@ export const PhotoForm = () => {
     });
 
 		formData.set('name', formState.name);
+		console.log(formState)
 
-		mutation.mutate({ formData })
+		// mutation.mutate({ formData })
 	}
 
 	const handleFileAndSaveName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +47,12 @@ export const PhotoForm = () => {
 			<div className='column flex-grow p-8'>
 					<input type="file" name="theFiles" onChange={handleFileAndSaveName} />
 					<input type="text" name="name" onChange={handleChange} value={formState.name} />
+
+					{photoFormProperties.map(property => renderForm[property.type]({
+						...property,
+						value: formState[property.name],
+						handleChange: handleChange
+					}))}
 
 					<Button handleClick={handleSubmit}>Upload</Button>
 			</div>

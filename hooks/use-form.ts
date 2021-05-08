@@ -8,6 +8,8 @@ export const useForm = <T>({ initialState }: UseFormProps<T>) => {
 	const [formState, setFormState] = useState<T>(initialState)
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		console.log('event: ', event.target.value)
+		console.log('name: ', event.target.name)
 		setFormState(prevState => ({
 			...prevState,
 			[event.target.name]: event.target.value
