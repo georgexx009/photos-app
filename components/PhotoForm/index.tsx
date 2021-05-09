@@ -1,11 +1,9 @@
 import React, { useContext } from 'react'
 import { useMutation } from 'react-query'
-import { useForm } from '@hooks'
+import { useForm, useRenderForm } from '@hooks'
 import { uploadPhotoRequest } from '@request'
 import { Button } from '@components/Button'
-import { Dropdown } from '@components/Dropdown'
 import { photoFormProperties } from 'constants/photoForm'
-import { renderForm } from '../../utils/renderForm'
 import { PhotoFormState } from '@types'
 import { createInitialFormState } from './createInitialFormState'
 import ModalContext from 'context/modalCtx'
@@ -15,6 +13,7 @@ const formInitialState: PhotoFormState = createInitialFormState<PhotoFormState>(
 export const PhotoForm = () => {
 	const { formState, setFormState, handleChangeFile, handleChange} = useForm<PhotoFormState>({ initialState: formInitialState })
 	const { closeModal } = useContext(ModalContext)
+	const renderForm = useRenderForm()
 
 	const mutation = useMutation(async ({ formData }: { formData: FormData } ) => {
 		const response = await uploadPhotoRequest({ formData })
