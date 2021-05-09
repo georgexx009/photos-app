@@ -32,6 +32,7 @@ export const PhotoForm = () => {
     })
 
 		formData.set('name', formState.name)
+		console.log(formState)
 		mutation.mutate({ formData })
 	}
 

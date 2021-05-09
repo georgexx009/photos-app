@@ -1,4 +1,4 @@
-export interface DropdownProps {
+export interface SelectProps {
 	options: Option[];
 	handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 	value: string;

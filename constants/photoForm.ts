@@ -17,35 +17,35 @@ export const photoFormProperties: PhotoForm[] = [
   {
     name: 'height',
     label: 'Photo height',
-    type: 'dropdown',
+    type: 'select',
     defaultValue: '300px',
     options: (photoMeasureOptions as unknown) as string[]
   },
   {
     name: 'width',
     label: 'Photo width',
-    type: 'dropdown',
+    type: 'select',
     defaultValue: '300px',
     options: (photoMeasureOptions as unknown) as string[]
   },
   {
     name: 'adjustmentView',
     label: 'Adjustment view',
-    type: 'dropdown',
+    type: 'select',
     defaultValue: 'height',
     options: (adjustmentViewOptions as unknown) as string[]
   },
   {
     name: 'imagePosition',
     label: 'Image position',
-    type: 'dropdown',
+    type: 'select',
     defaultValue: 'center',
     options: (imagePositionOptions as unknown) as string[]
   },
   {
     name: 'photoOrientation',
     label: 'Photo orientation',
-    type: 'dropdown',
+    type: 'select',
     defaultValue: 'horizontal',
     options: (photoOrientationOptions as unknown) as string[]
   }

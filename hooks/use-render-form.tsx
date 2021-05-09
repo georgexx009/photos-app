@@ -1,6 +1,6 @@
 import React from 'react';
 import { PhotoForm } from '@types';
-import { Dropdown, Input } from '@components'
+import { Select, Input } from '@components'
 
 export const useRenderForm = () => {
 	return {
@@ -29,7 +29,7 @@ export const useRenderForm = () => {
 				/>
 			</div>
 		),
-		dropdown: ({
+		select: ({
 			options,
 			value,
 			name,
@@ -40,7 +40,7 @@ export const useRenderForm = () => {
 				<label className="block mb-2 text-sm text-gray-600" htmlFor={name}>
 					{label}
 				</label>
-					<Dropdown
+					<Select
 						options={options.map(option => ({
 							value: option,
 							label: option
