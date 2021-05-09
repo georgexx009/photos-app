@@ -12,6 +12,13 @@ export interface BtnProps extends DefaultBtnProps {
   size?: 'default' | 'large';
 }
 
+const getBtnColor = (variant: BtnProps['variant'], disabled: BtnProps['disabled']) => {
+  if (disabled) {
+    return 'bg-gray-300'
+  }
+  return variant === 'primary' ? 'bg-blue-600' : 'bg-gray-600'
+}
+
 export const Button = ({
   children,
   handleClick = () => {},
@@ -21,13 +28,16 @@ export const Button = ({
   size = 'default',
   ...restProps
 }: BtnProps) => {
+  const bgColor = getBtnColor(variant, disabled)
+
   return (
     <button
     onClick={handleClick}
     // variant={variant}
     disabled={disabled}
     // size={size}
-    className={`btn ${variant === 'secondary' ? 'bg-gray-600' : 'bg-green'}`}
+    className={`btn ${bgColor}`}
+    // style={disabled && { cursor: 'not-allowed', backgroundColor: 'gray' }}
     {...restProps}
   >
     {children}

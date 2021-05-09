@@ -19,6 +19,10 @@ export const PhotoForm = () => {
 	const mutation = useMutation(async ({ formData }: { formData: FormData } ) => {
 		const response = await uploadPhotoRequest({ formData })
 		return response.data
+	}, {
+		onSuccess: () => {
+			closeModal()
+		}
 	})
 
 	const handleSubmit = async () => {
@@ -30,7 +34,6 @@ export const PhotoForm = () => {
 
 		formData.set('name', formState.name)
 		mutation.mutate({ formData })
-		closeModal()
 	}
 
 	const handleFileAndSaveName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +63,7 @@ export const PhotoForm = () => {
 			</div>
 			<div className="w-full lg:w-2/3 flex justify-between mx-auto mt-4">
 				<Button variant="secondary" handleClick={closeModal}>Close</Button>
-				<Button handleClick={handleSubmit}>Upload</Button>
+				<Button handleClick={handleSubmit} disabled={!formState.theFiles || formState.name === ''}>Upload</Button>
 				</div>
 		</div>
 	)
