@@ -10,7 +10,7 @@ import ModalContext from 'context/modalCtx'
 
 const formInitialState: PhotoFormState = createInitialFormState<PhotoFormState>({formProperties: photoFormProperties})
 
-export const PhotoForm = () => {
+export const PhotoForm = ({ enableUpload = false }: { enableUpload?: boolean }) => {
 	const { formState, setFormState, handleChangeFile, handleChange} = useForm<PhotoFormState>({ initialState: formInitialState })
 	const { closeModal } = useContext(ModalContext)
 	const renderForm = useRenderForm()
@@ -63,7 +63,7 @@ export const PhotoForm = () => {
 			</div>
 			<div className="w-full lg:w-2/3 flex justify-between mx-auto mt-4">
 				<Button variant="secondary" handleClick={closeModal}>Close</Button>
-				<Button handleClick={handleSubmit} disabled={!formState.theFiles || formState.name === ''}>Upload</Button>
+				{enableUpload && <Button handleClick={handleSubmit} disabled={!formState.theFiles || formState.name === ''}>Upload</Button>}
 				</div>
 		</div>
 	)
