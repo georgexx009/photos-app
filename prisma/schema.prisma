@@ -16,7 +16,7 @@ model Photo {
   name    String
   height  String
   width   String
-  adjusmentView String
-  imagePosition String
-  photoOrientation  String
+  adjustment_view String
+  image_position String
+  photo_orientation  String
 }

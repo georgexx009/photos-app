@@ -4,6 +4,7 @@ import prisma from '@lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 import { ApiResponse, File, CloudinaryRes, PhotoMetaData } from '@types'
+import { PhotoMapper } from '@mappers'
 
 interface NextConnectApiRequest extends NextApiRequest {
   files: File[],
@@ -30,19 +31,23 @@ apiRoute.post(async (req: NextConnectApiRequest, res: NextApiResponse<ResponseDa
 	const cloudinaryRes = await cloudinary.uploadFiles({ files: req.files, name: req.body.name });
   const fileCreated = cloudinaryRes[0];
 
+  const { name, height, width, adjustmentView, imagePosition, photoOrientation } = req.body
   const primsaRes = await prisma.photo.create({
     data: {
       url: fileCreated.url,
-      name: req.body.name,
-      height: '350px',
-      width: '250px',
-      adjusmentView: 'height',
-      imagePosition: 'center',
-      photoOrientation: 'horizontal'
+      name,
+      height,
+      width,
+      adjustment_view: adjustmentView,
+      image_position: imagePosition,
+      photo_orientation: photoOrientation
     }
   })
+
+  const photoMappaer = new PhotoMapper()
+  const photoMapped = photoMappaer.fromPrisma(primsaRes)
   
-  res.status(200).json({ data: primsaRes });
+  res.status(200).json({ data: photoMapped });
 });
 
 export const config = {

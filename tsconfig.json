@@ -28,7 +28,8 @@
       "@services/*": ["services/*"],
       "@types": ["types"],
       "@hooks": ["hooks"],
-      "@request": ["utils/requests"]
+      "@request": ["utils/requests"],
+      "@mappers": ["utils/mappers"]
     }
   },
   "include": [

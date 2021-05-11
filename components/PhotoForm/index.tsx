@@ -31,8 +31,16 @@ export const PhotoForm = ({ enableUpload = false }: { enableUpload?: boolean }) 
       formData.append('theFiles', file)
     })
 
-		formData.set('name', formState.name)
-		console.log(formState)
+		for (const [key, value] of Object.entries(formState)){
+			if (key !== 'theFiles') {
+				formData.set(key, value)
+			}
+		}
+
+		// formData.set('name', formState.name)
+		// formData.set('height', formState.height)
+		// formData.set('width', formState.width)
+
 		mutation.mutate({ formData })
 	}
 
