@@ -1,6 +1,6 @@
 import { PhotoPrisma, Photo as IPhoto } from '@types'
 
-export class PhotoMapper {
+class PhotoMapper {
 	constructor() {}
 
 	fromPrisma(photo: PhotoPrisma): IPhoto {
@@ -15,3 +15,5 @@ export class PhotoMapper {
 		}
 	}
 }
+
+export const photoMapper = new PhotoMapper()

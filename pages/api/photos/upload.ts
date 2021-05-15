@@ -1,10 +1,10 @@
-import { Cloudinary } from '@services/cloudinary'
+import { Cloudinary } from 'server/services/cloudinary'
 import { Multer } from '@lib/multer'
 import prisma from '@lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 import { ApiResponse, File, CloudinaryRes, PhotoMetaData } from '@types'
-import { PhotoMapper } from '@mappers'
+import { photoMapper } from '@mappers'
 
 interface NextConnectApiRequest extends NextApiRequest {
   files: File[],
@@ -44,8 +44,7 @@ apiRoute.post(async (req: NextConnectApiRequest, res: NextApiResponse<ResponseDa
     }
   })
 
-  const photoMappaer = new PhotoMapper()
-  const photoMapped = photoMappaer.fromPrisma(primsaRes)
+  const photoMapped = photoMapper.fromPrisma(primsaRes)
   
   res.status(200).json({ data: photoMapped });
 });

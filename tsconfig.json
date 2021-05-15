@@ -25,11 +25,11 @@
       "@components": ["components"],
       "@lib/*": ["lib/*"],
       "@controllers/*": ["controllers/*"],
-      "@services/*": ["services/*"],
       "@types": ["types"],
       "@hooks": ["hooks"],
       "@request": ["utils/requests"],
-      "@mappers": ["utils/mappers"]
+      "@mappers": ["utils/mappers"],
+      "@services": ["server/services"]
     }
   },
   "include": [

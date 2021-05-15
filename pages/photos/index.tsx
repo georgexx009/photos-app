@@ -3,11 +3,11 @@ import { Button } from '@components/Button'
 import { Modal } from '@components/Modal'
 import { PhotoForm } from '@components/PhotoForm'
 
-import { GetServerSideProps, GetStaticProps } from 'next'
-import prisma from '@lib/prisma'
+import { GetServerSideProps } from 'next'
 import { Photo } from '.prisma/client'
 import { useToggle } from '@hooks'
 import { ModalProvider } from 'context/modalCtx'
+import { PhotoService } from '@services'
 
 export default function Photos({ photos, enableUpload = false }: { photos: Photo[], enableUpload?: boolean }) {
   const { toggleVal: showModal, turnOff: closeModal, turnOn: openModal } = useToggle()
@@ -49,12 +49,14 @@ export default function Photos({ photos, enableUpload = false }: { photos: Photo
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const photos = await prisma.photo.findMany()
   const enableUpload = process.env.UPLOAD_ENABLE === 'true'
+
+  const photoService = new PhotoService()
+  const photoList = await photoService.getPhotos()
 
   return {
     props: {
-      photos,
+      photos: photoList,
       enableUpload
     }
   }
