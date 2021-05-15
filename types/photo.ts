@@ -49,6 +49,7 @@ export interface PhotoMetaData {
 }
 
 export interface PhotoPrisma {
+  id: number
   name: string
   url: string
   height: string
@@ -59,6 +60,7 @@ export interface PhotoPrisma {
 }
 
 export interface Photo {
+  id?: number
   name: string
   height: string
   width: string

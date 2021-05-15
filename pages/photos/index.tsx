@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@components/Button'
 import { Modal } from '@components/Modal'
 import { PhotoForm } from '@components/PhotoForm'
 
 import { GetServerSideProps } from 'next'
-import { Photo } from '.prisma/client'
+import { useQuery } from 'react-query'
+import { Photo } from '@types'
 import { useToggle } from '@hooks'
 import { ModalProvider } from 'context/modalCtx'
 import { PhotoService } from '@services'
+import { getPhotos } from '@request'
 
-export default function Photos({ photos, enableUpload = false }: { photos: Photo[], enableUpload?: boolean }) {
+interface PhotosProps { 
+  initialPhotos: Photo[], 
+  enableUpload?: boolean 
+}
+
+export default function Photos({ initialPhotos, enableUpload = false }: PhotosProps) {
+  const { refetch: refetchPhotosRequest } = useQuery('getPhotos', getPhotos, {
+    enabled: false
+  })
+
   const { toggleVal: showModal, turnOff: closeModal, turnOn: openModal } = useToggle()
+  const [photos, setPhotos] = useState<Photo[]>(initialPhotos)
+
+  const refetchPhotos = async () => {
+    const { data } = await refetchPhotosRequest()
+    setPhotos(data)
+  }
 
   return (
     <div className='container-page'>
@@ -35,7 +52,7 @@ export default function Photos({ photos, enableUpload = false }: { photos: Photo
             showModal
           }}>
             <Modal handleCloseModal={closeModal}>
-              <PhotoForm enableUpload={enableUpload} />
+              <PhotoForm enableUpload={enableUpload} handleSubmitSuccess={refetchPhotos} />
             </Modal>
           </ModalProvider>
         )}
@@ -56,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      photos: photoList,
+      initialPhotos: photoList,
       enableUpload
     }
   }

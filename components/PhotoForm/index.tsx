@@ -10,7 +10,7 @@ import ModalContext from 'context/modalCtx'
 
 const formInitialState: PhotoFormState = createInitialFormState<PhotoFormState>({formProperties: photoFormProperties})
 
-export const PhotoForm = ({ enableUpload = false }: { enableUpload?: boolean }) => {
+export const PhotoForm = ({ enableUpload = false, handleSubmitSuccess = () => {} }: { enableUpload?: boolean, handleSubmitSuccess?: () => void }) => {
 	const { formState, setFormState, handleChangeFile, handleChange} = useForm<PhotoFormState>({ initialState: formInitialState })
 	const { closeModal } = useContext(ModalContext)
 	const renderForm = useRenderForm()
@@ -21,6 +21,7 @@ export const PhotoForm = ({ enableUpload = false }: { enableUpload?: boolean }) 
 	}, {
 		onSuccess: () => {
 			closeModal()
+			handleSubmitSuccess()
 		}
 	})
 
@@ -36,10 +37,6 @@ export const PhotoForm = ({ enableUpload = false }: { enableUpload?: boolean }) 
 				formData.set(key, value)
 			}
 		}
-
-		// formData.set('name', formState.name)
-		// formData.set('height', formState.height)
-		// formData.set('width', formState.width)
 
 		mutation.mutate({ formData })
 	}

@@ -5,6 +5,7 @@ class PhotoMapper {
 
 	fromPrisma(photo: PhotoPrisma): IPhoto {
 		return {
+			id: photo.id,
 			name: photo.name,
 			height: photo.height,
 			width: photo.width,
