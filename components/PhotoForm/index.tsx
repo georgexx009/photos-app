@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useMutation } from 'react-query'
 import { useForm, useRenderForm } from '@hooks'
 import { uploadPhotoRequest } from '@request'
-import { Button } from '@components/Button'
+import { Button, Spinner } from '@components'
 import { photoFormProperties } from 'constants/photoForm'
 import { PhotoFormState } from '@types'
 import { createInitialFormState } from './createInitialFormState'
@@ -52,8 +52,11 @@ export const PhotoForm = ({ enableUpload = false, handleSubmitSuccess = () => {}
 
 	return (
 		<div className='grid max-h-full' style={{ gridTemplateRows: 'auto 1fr auto'}}>
-			<h2 className="m-4">Photo form</h2>
-			<div className='column flex-grow p-4 lg:p-8 overflow-y-auto'>
+			<div className="flex justify-between">
+				<h2 className="m-4">Photo form</h2>
+				{mutation.isLoading && <Spinner />}
+			</div>
+			<div className='column flex-grow p-4 lg:p-8 overflow-y-auto overflow-x-hidden'>
 					<div className="py-2">
 						<div className="mb-6">
 							<input type="file" name="theFiles" onChange={handleFileAndSaveName} />
