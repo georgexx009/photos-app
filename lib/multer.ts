@@ -7,7 +7,7 @@ export class Multer {
 
 	constructor() {
 		this.multer = multer({
-			limits: { fileSize: this.oneMegabyteInBytes * 60 },
+			limits: { fileSize: this.oneMegabyteInBytes * 70 },
 			storage: multer.diskStorage({
 				filename: (req, file, cb) => cb(null, file.originalname),
 			}),

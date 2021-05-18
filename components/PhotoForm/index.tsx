@@ -8,6 +8,18 @@ import { PhotoFormState } from '@types'
 import { createInitialFormState } from './createInitialFormState'
 import ModalContext from 'context/modalCtx'
 
+interface IRes {
+	data: any
+}
+
+interface IError {
+	response: {
+		data: {
+			error: string
+		}
+	}
+}
+
 const formInitialState: PhotoFormState = createInitialFormState<PhotoFormState>({formProperties: photoFormProperties})
 
 export const PhotoForm = ({ enableUpload = false, handleSubmitSuccess = () => {} }: { enableUpload?: boolean, handleSubmitSuccess?: () => void }) => {
@@ -55,6 +67,9 @@ export const PhotoForm = ({ enableUpload = false, handleSubmitSuccess = () => {}
 			<div className="flex justify-between">
 				<h2 className="m-4">Photo form</h2>
 				{mutation.isLoading && <Spinner />}
+				{mutation.isError && (
+					<span className='text-red-500'>{(mutation.error as IError).response.data.error}</span>
+				)}
 			</div>
 			<div className='column flex-grow p-4 lg:p-8 overflow-y-auto overflow-x-hidden'>
 					<div className="py-2">

@@ -17,7 +17,13 @@ const cloudinary = new Cloudinary()
 
 const apiRoute = nextConnect({
   onError(error, req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) {
-    console.log(error.message)
+    console.log(error.name)
+    if (error.name === 'MulterError') {
+      res.status(400).send({
+        error: error.message
+      })
+      return
+    }
     res.status(501).json({ error: `Sorry something Happened! ${error.message}` });
   },
   onNoMatch(req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) {
