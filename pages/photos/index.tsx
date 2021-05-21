@@ -32,7 +32,7 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
   return (
     <div className='container-page'>
       
-      <Header username={ session?.user?.name } />
+      <Header username={ session?.user?.name } imgUrl={session?.user?.image} />
 
       <main className='main'>
         <div className='flex justify-end'>
