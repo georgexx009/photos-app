@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Button } from '@components/Button'
-import { Modal } from '@components/Modal'
-import { PhotoForm } from '@components/PhotoForm'
+import { PhotoForm, Header, Modal, Button } from '@components'
 
 import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/client'
 import { useQuery } from 'react-query'
-import { Photo } from '@types'
+import { Photo, Session } from '@types'
 import { useToggle } from '@hooks'
 import { ModalProvider } from 'context/modalCtx'
 import { PhotoService } from '@services'
@@ -13,10 +12,11 @@ import { getPhotos } from '@request'
 
 interface PhotosProps { 
   initialPhotos: Photo[], 
-  enableUpload?: boolean 
+  enableUpload?: boolean,
+  session: Session
 }
 
-export default function Photos({ initialPhotos, enableUpload = false }: PhotosProps) {
+export default function Photos({ initialPhotos, enableUpload = false, session }: PhotosProps) {
   const { refetch: refetchPhotosRequest } = useQuery('getPhotos', getPhotos, {
     enabled: false
   })
@@ -31,9 +31,8 @@ export default function Photos({ initialPhotos, enableUpload = false }: PhotosPr
 
   return (
     <div className='container-page'>
-      <header className='p-8'>
-        <h1>Photo list</h1>
-      </header>
+      
+      <Header username={ session?.user?.name } />
 
       <main className='main'>
         <div className='flex justify-end'>
@@ -65,8 +64,10 @@ export default function Photos({ initialPhotos, enableUpload = false }: PhotosPr
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const enableUpload = process.env.UPLOAD_ENABLE === 'true'
+
+  const session = await getSession(context)
 
   const photoService = new PhotoService()
   const photoList = await photoService.getPhotos()
@@ -74,7 +75,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       initialPhotos: photoList,
-      enableUpload
+      enableUpload,
+      session
     }
   }
 }

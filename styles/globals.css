@@ -74,6 +74,10 @@
     border-width: 1px;
     border-radius: 0.375rem;
   }
+
+  .test {
+    border: 1px solid red;
+  }
 }
 
 html,
