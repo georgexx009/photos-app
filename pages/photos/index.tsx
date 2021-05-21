@@ -69,6 +69,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const session = await getSession(context)
 
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/log-in',
+        permanent: false
+      }
+    }
+  }
+
   const photoService = new PhotoService()
   const photoList = await photoService.getPhotos()
 
