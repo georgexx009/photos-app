@@ -6,10 +6,10 @@ interface PhotosViewerProps {
 	photos: Photo[]
 }
 
-const PhotoContainer = ({ url }: { url: string }) => {
+const PhotoContainer = ({ url, alt }: { url: string, alt: string }) => {
 	return (
 		<div style={{ position: 'relative', width: '300px', height: '300px' }}>
-			<Image url={url} />
+			<Image url={url} alt={alt} />
 		</div>
 	)
 }
@@ -23,7 +23,7 @@ export const PhotosViewer = ({ photos = [] }: PhotosViewerProps) => {
 		<div className="flex flex-wrap">
 			{photos.length === 0 ? <LoadingPhotos /> : (
 				photos.map(photo => (
-					<PhotoContainer key={photo.id} url={photo.url} />
+					<PhotoContainer key={photo.id} url={photo.url} alt={photo.name} />
 				))
 			)}
 			{/* <div style={{ position: 'relative', width: '300px', height: '300px' }}>
