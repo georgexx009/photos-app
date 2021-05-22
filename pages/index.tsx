@@ -1,17 +1,24 @@
 import Head from 'next/head'
+import { PhotosViewer } from '@components'
 
 export default function Home() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Pictures</title>
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
+      <header className='center py-12'>
         <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Photos
         </h1>
+      </header>
+
+      <main>
+        <div className="flex justify-center">
+          <PhotosViewer />
+        </div>
       </main>
 
     </div>
