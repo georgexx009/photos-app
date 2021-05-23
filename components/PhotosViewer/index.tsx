@@ -8,7 +8,7 @@ interface PhotosViewerProps {
 
 const PhotoContainer = ({ url, alt }: { url: string, alt: string }) => {
 	return (
-		<div style={{ position: 'relative', width: '300px', height: '300px' }}>
+		<div className='m-1 relative w-80 h-80 rounded-md overflow-hidden' >
 			<Image url={url} alt={alt} />
 		</div>
 	)
@@ -20,7 +20,7 @@ const LoadingPhotos = () => {
 
 export const PhotosViewer = ({ photos = [] }: PhotosViewerProps) => {
 	return (
-		<div className="flex flex-wrap">
+		<div className="flex flex-col lg:flex-row flex-wrap justify-center items-center">
 			{photos.length === 0 ? <LoadingPhotos /> : (
 				photos.map(photo => (
 					<PhotoContainer key={photo.id} url={photo.url} alt={photo.name} />

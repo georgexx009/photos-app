@@ -8,7 +8,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider session={pageProps.session}>
-        <Component {...pageProps} />
+        <div className='pb-6'>
+          <Component {...pageProps} />
+        </div>
       </AuthProvider>
     </QueryClientProvider>
   )

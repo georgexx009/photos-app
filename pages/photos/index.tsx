@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { PhotoForm, Header, Modal, Button } from '@components'
 
 import { GetServerSideProps } from 'next'
@@ -34,7 +35,7 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
       
       <Header username={ session?.user?.name } imgUrl={session?.user?.image} />
 
-      <main className='main'>
+      <main className='main test'>
         <div className='flex justify-end'>
           <Button handleClick={openModal}>Add photo</Button>
         </div>
@@ -55,6 +56,11 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
             </Modal>
           </ModalProvider>
         )}
+        <div className='mt-auto'>
+          <Link href='/'>
+            <a>{'< View Photos'}</a>
+          </Link>
+        </div>
       </main>
 
       <footer className="footer">
