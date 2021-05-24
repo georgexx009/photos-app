@@ -4,7 +4,8 @@ import { Avatar } from '@components'
 
 export const Header = ({ username = 'not logged', imgUrl }: { username?: string, imgUrl: string }) => {
 	return (
-		<header className='p-4 lg:p-8 flex flex-col lg:flex-row justify-between items-center' >
+		<header className='p-4 lg:p-8 flex flex-col lg:flex-row justify-between items-center bottom-divider' >
+			<div></div>
 			<h1>Photo list</h1>
 			<div className="w-full lg:w-auto flex justify-between lg:justify-end items-center">
 				<Avatar imgUrl={imgUrl} />

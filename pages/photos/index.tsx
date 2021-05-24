@@ -35,7 +35,7 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
       
       <Header username={ session?.user?.name } imgUrl={session?.user?.image} />
 
-      <main className='main test'>
+      <main className='main'>
         <div className='flex justify-end'>
           <Button handleClick={openModal}>Add photo</Button>
         </div>

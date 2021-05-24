@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { PhotosViewer } from '@components'
+import { PhotosViewer, SideBar } from '@components'
 import { GetServerSideProps } from 'next'
 import { PhotoService } from '@services'
 import { Photo } from '@types'
@@ -13,7 +13,7 @@ export default function Home({ photos }: HomeProps) {
   return (
     <div className='flex flex-col justify-between'>
       <Head>
-        <title>Pictures</title>
+        <title>Photos-app</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -28,12 +28,6 @@ export default function Home({ photos }: HomeProps) {
           <PhotosViewer photos={photos} />
         </div>
       </main>
-
-      <footer className="footer py-6">
-        <Link href='/photos'>
-          Add a photo
-        </Link>
-      </footer>
 
     </div>
   )
