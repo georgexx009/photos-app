@@ -13,7 +13,7 @@ export default function Home({ photos }: HomeProps) {
   return (
     <div className='flex flex-col justify-between'>
       <Head>
-        <title>Photos-app</title>
+        <title>Photos app</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
