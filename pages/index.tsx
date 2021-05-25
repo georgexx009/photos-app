@@ -17,10 +17,10 @@ export default function Home({ photos }: HomeProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <header className='center pt-4'>
-        <h3>
+      <header className='center py-4 lg:py-8'>
+        <span className='text-3xl lg:text-4xl'>
           Kiara
-        </h3>
+        </span>
       </header>
 
       <main className='main mb-4 items-center'>

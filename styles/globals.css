@@ -94,8 +94,15 @@
     position: fixed;
     width: 36px;
     height: 30px;
-    left: 36px;
-    top: 36px;
+    left: 25px;
+    top: 25px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .bm-burger-button {
+      left: 36px;
+      top: 36px;
+    }
   }
 
   /* Color/shape of burger icon bars */
@@ -133,7 +140,7 @@
     /* background: #373a47; */
     background: white;
     padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
+    /* font-size: 1.15em; */
   }
 
   /* Morph shape necessary with bubble or elastic */
@@ -144,7 +151,7 @@
   /* Wrapper for item list */
   .bm-item-list {
     color: black;
-    padding: 0.8em;
+    padding: 1em;
   }
 
   /* Individual item */
