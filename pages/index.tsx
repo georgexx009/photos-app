@@ -19,7 +19,7 @@ export default function Home({ photos }: HomeProps) {
 
       <header className='center py-4 lg:py-8'>
         <span className='text-3xl lg:text-4xl'>
-          Kiara
+          Kiara Photos
         </span>
       </header>
 
