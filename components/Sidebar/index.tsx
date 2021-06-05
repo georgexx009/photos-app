@@ -12,6 +12,7 @@ export function SideBar() {
   return (
     <Menu>
       <a id="home" className="menu-item text-lg" href="/">Home</a>
+      <a id="home" className="menu-item text-lg" href="/photos/large-view">Large View</a>
       <a id="photo-manager" className="menu-item text-lg" href="/photos">Photo Manager</a>
 			<a id="contact" className="menu-item text-lg" href="/contact">Contact</a>
       {session && (
