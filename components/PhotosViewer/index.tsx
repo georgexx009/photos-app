@@ -26,18 +26,6 @@ export const PhotosViewer = ({ photos = [] }: PhotosViewerProps) => {
 					<PhotoContainer key={photo.id} url={photo.url} alt={photo.name} />
 				))
 			)}
-			{/* <div style={{ position: 'relative', width: '300px', height: '300px' }}>
-				<Image />
-			</div>
-			<div style={{ position: 'relative', width: '300px', height: '300px' }}>
-				<Image />
-			</div>
-			<div style={{ position: 'relative', width: '300px', height: '300px' }}>
-				<Image />
-			</div>
-			<div style={{ position: 'relative', width: '300px', height: '300px' }}>
-				<Image />
-			</div> */}
 		</div>
 	)
 }
