@@ -42,11 +42,11 @@ apiRoute.post(async (req: NextConnectApiRequest, res: NextApiResponse<ResponseDa
     data: {
       url: fileCreated.url,
       name,
-      height,
-      width,
-      adjustment_view: adjustmentView,
-      image_position: imagePosition,
-      photo_orientation: photoOrientation
+      height: '',
+      width: '',
+      adjustment_view: '',
+      image_position: '',
+      photo_orientation: ''
     }
   })
 

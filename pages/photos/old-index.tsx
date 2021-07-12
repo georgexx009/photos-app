@@ -1,17 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { PhotosLargeViewer, SideBar } from '@components'
+import { PhotosViewer, SideBar } from '@components'
 import { GetServerSideProps } from 'next'
 import { PhotoService } from '@services'
 import { Photo } from '@types'
-import { SocialMedia } from '@components/SocialMedia'
-import { socialMediasList } from 'constants/socialMediaList'
 
 interface HomeProps {
   photos: Photo[]
 }
 
-export default function LargeView({ photos }: HomeProps) {
+export default function Home({ photos }: HomeProps) {
   return (
     <div className='flex flex-col justify-between'>
       <Head>
@@ -21,16 +19,13 @@ export default function LargeView({ photos }: HomeProps) {
 
       <header className='center py-4 lg:py-8'>
         <span className='text-3xl lg:text-4xl'>
-          Ivan Gaxiola
+          Kiara Photos
         </span>
       </header>
 
-      <main className='flex flex-col flex-1 mb-4 items-center p-2 lg:p-2'>
-        <div className='flex justify-end w-full px-16'>
-          <SocialMedia socialMediaList={socialMediasList} />
-        </div>
-        <div className="flex justify-center w-full">
-          <PhotosLargeViewer photos={photos} />
+      <main className='main mb-4 items-center'>
+        <div className="flex justify-center">
+          <PhotosViewer photos={photos} />
         </div>
       </main>
 
@@ -40,7 +35,8 @@ export default function LargeView({ photos }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const photoService = new PhotoService()
-  const photos = await photoService.getOrderedPhotos()
+  const photos = await photoService.getPhotos()
+  console.log(photos)
 
   return {
     props: {

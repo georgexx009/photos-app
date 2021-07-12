@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image } from '@components'
 import { Photo } from '@types'
+import { getPosition } from 'utils/orderedPhotos/filterOrderedPhotos'
 
 interface PhotosViewerProps {
 	photos: Photo[]
@@ -8,7 +9,7 @@ interface PhotosViewerProps {
 
 const PhotoContainer = ({ url, alt }: { url: string, alt: string }) => {
 	return (
-		<div className='m-1 lg:m-12 relative rounded-md overflow-hidden photo-height' style={{
+		<div className='m-1 lg:my-4 lg:mx-8 relative overflow-hidden photo-height' style={{
 			// height: '700px'
 		}} >
 			<Image url={url} alt={alt} />
@@ -26,7 +27,7 @@ export const PhotosLargeViewer = ({ photos = [] }: PhotosViewerProps) => {
 			<div className='grid w-full lg:grid-cols-2'>
 				{photos.length === 0 ? <LoadingPhotos /> : (
 					photos.map(photo => (
-						<PhotoContainer key={photo.id} url={photo.url} alt={photo.name} />
+						<PhotoContainer key={getPosition(photo.name)} url={photo.url} alt={photo.name} />
 					))
 				)}
 			</div>

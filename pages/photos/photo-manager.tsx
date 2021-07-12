@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { PhotoForm, Header, Modal, Button } from '@components'
+import { PhotoForm, Header, Modal, Button, PhotoEdit } from '@components'
 
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
@@ -18,6 +18,8 @@ interface PhotosProps {
 }
 
 export default function Photos({ initialPhotos, enableUpload = false, session }: PhotosProps) {
+  const [modalType, setModalType] = useState<'addPhoto' | 'editPhoto'>('addPhoto')
+
   const { refetch: refetchPhotosRequest } = useQuery('getPhotos', getPhotos, {
     enabled: false
   })
@@ -37,12 +39,25 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
 
       <main className='main'>
         <div className='flex justify-end'>
-          <Button handleClick={openModal}>Add photo</Button>
+          <Button handleClick={() => {
+            setModalType('addPhoto')
+            openModal()
+          }}>Add photo</Button>
         </div>
         <div>
-          {photos.map(photo => (
-            <p key={photo.id}>{photo.name}</p>
-          ))}
+          <h3>Photo list</h3>
+          <p>Change number in the name to choose the order.</p>
+          <p className='mb-6'>If the photo doesn't have a number, it won't be render</p>
+            <div className='flex flex-col'>
+            {photos.map(photo => (
+              <div className='w-40' onClick={() => {
+                setModalType('editPhoto')
+                openModal()
+              }}>
+                <a className='cursor-pointer' key={photo.id}>{photo.name}{` >`}</a>
+              </ div>
+            ))}
+            </div>
         </div>
 
         {showModal && (
@@ -52,7 +67,8 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
             showModal
           }}>
             <Modal handleCloseModal={closeModal}>
-              <PhotoForm enableUpload={enableUpload} handleSubmitSuccess={refetchPhotos} />
+              {modalType === 'addPhoto' && <PhotoForm enableUpload={enableUpload} handleSubmitSuccess={refetchPhotos} />}
+              {modalType === 'editPhoto' && <PhotoEdit />}
             </Modal>
           </ModalProvider>
         )}
