@@ -4,6 +4,7 @@ import { IconProps, Icon } from '@components'
 interface SocialMediaInfo {
 	icon: IconProps['type']
 	url: string
+	position: number
 }
 
 export interface SocialMediaProps {
@@ -13,8 +14,8 @@ export interface SocialMediaProps {
 export const SocialMedia = ({ socialMediaList }: SocialMediaProps) => {
 	return (
 		<div className='flex'>
-			{socialMediaList.map(socialMedia => (
-				<div className='mx-3'>
+			{socialMediaList.map((socialMedia, i) => (
+				<div key={socialMedia.position} className='mx-3'>
 					<a href={socialMedia.url} target='_blank'>
 						<Icon type={socialMedia.icon} />
 					</a>
