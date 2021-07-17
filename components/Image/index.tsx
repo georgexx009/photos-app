@@ -14,12 +14,13 @@ export const Image = ({ url, objectFill = 'cover', alt = 'image' }: ImageProps) 
 		<NextImage
 			src={url}
 			alt={alt}
+			// layout="fill"
 			layout="fill"
-			objectFit={objectFill}
-			// objectFit="cover" // parent size, but only look what it can from center
+			// objectFit={objectFill}
+			objectFit="cover" // parent size, but only look what it can from center
 			// objectFit="contain" // fits in the parent size but without loosing proportions
-			// width={500}
-			// height={500}
+			// width={1000}
+			// height={1000}
 		/>
 	)
 }

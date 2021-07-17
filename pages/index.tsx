@@ -41,6 +41,7 @@ export default function LargeView({ photos }: HomeProps) {
 export const getServerSideProps: GetServerSideProps = async () => {
   const photoService = new PhotoService()
   const photos = await photoService.getOrderedPhotos()
+  console.log(photos)
 
   return {
     props: {

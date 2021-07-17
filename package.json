@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@prisma/client": "^2.21.2",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "axios": "^0.21.1",
     "cloudinary": "^1.25.1",
     "formidable": "^1.2.2",
@@ -22,6 +23,7 @@
     "next-connect": "^0.10.1",
     "react": "17.0.2",
     "react-burger-menu": "^3.0.6",
+    "react-cool-dimensions": "^2.0.7",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-query": "^3.13.10"
