@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { PhotosLargeViewer, SideBar } from '@components'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { PhotoService } from '@services'
 import { Photo } from '@types'
 import { SocialMedia } from '@components/SocialMedia'
@@ -38,7 +38,7 @@ export default function LargeView({ photos }: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const photoService = new PhotoService()
   const photos = await photoService.getOrderedPhotos()
   console.log(photos)
