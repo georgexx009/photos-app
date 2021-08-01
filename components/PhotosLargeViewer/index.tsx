@@ -45,16 +45,23 @@ export const PhotosLargeViewer = ({ photos = [] }: PhotosViewerProps) => {
 	return (
 		<div className="flex flex-col lg:flex-row flex-wrap justify-center items-center w-full">
 			<div className='grid w-full lg:grid-cols-2 lg:mx-24'>
-				<div className='flex flex-col'>
+				<div className='hidden lg:flex lg:flex-col'>
 					{photos.length === 0 ? <LoadingPhotos /> : (
 						photos.map(photo => (getPosition(photo.name) % 2) !== 0 && (
 							<PhotoContainerV2 key={getPosition(photo.name)} url={photo.url} alt={photo.name} />
 						))
 					)}
 				</div>
-				<div className='flex flex-col'>
+				<div className='hidden lg:flex lg:flex-col'>
 					{photos.length === 0 ? <LoadingPhotos /> : (
 						photos.map(photo => (getPosition(photo.name) % 2) === 0 && (
+							<PhotoContainerV2 key={getPosition(photo.name)} url={photo.url} alt={photo.name} />
+						))
+					)}
+				</div>
+				<div className='lg:hidden flex flex-col'>
+					{photos.length === 0 ? <LoadingPhotos /> : (
+						photos.map(photo => (
 							<PhotoContainerV2 key={getPosition(photo.name)} url={photo.url} alt={photo.name} />
 						))
 					)}
