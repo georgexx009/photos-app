@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { PhotosLargeViewer, SideBar } from '@components'
+import { PhotosLargeViewer, Title } from '@components'
 import { GetStaticProps } from 'next'
 import { PhotoService } from '@services'
 import { Photo } from '@types'
@@ -20,9 +20,7 @@ export default function LargeView({ photos }: HomeProps) {
       </Head>
 
       <header className='center py-4 lg:py-8'>
-        <span className='text-3xl lg:text-4xl'>
-          Ivan Gaxiola
-        </span>
+        <Title />
       </header>
 
       <main className='flex flex-col flex-1 mb-4 items-center p-2 lg:p-2'>
