@@ -1,11 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import { PhotosLargeViewer, Title } from '@components'
+import { PhotosViewer, Title } from '@components'
 import { GetStaticProps } from 'next'
 import { PhotoService } from '@services'
 import { Photo } from '@types'
-import { SocialMedia } from '@components/SocialMedia'
-import { socialMediasList } from 'constants/socialMediaList'
 
 interface HomeProps {
   photos: Photo[]
@@ -24,11 +21,8 @@ export default function LargeView({ photos }: HomeProps) {
       </header>
 
       <main className='flex flex-col flex-1 mb-4 items-center p-2 lg:p-2'>
-        <div className='flex justify-end w-full px-16'>
-          <SocialMedia socialMediaList={socialMediasList} />
-        </div>
         <div className="flex justify-center w-full">
-          <PhotosLargeViewer photos={photos} />
+          <PhotosViewer photos={photos} />
         </div>
       </main>
 
@@ -38,8 +32,7 @@ export default function LargeView({ photos }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const photoService = new PhotoService()
-  const photos = await photoService.getOrderedPhotos()
-  console.log(photos)
+  const photos = await photoService.getPhotos()
 
   return {
     props: {
