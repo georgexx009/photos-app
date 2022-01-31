@@ -11,8 +11,8 @@ import { ModalProvider } from 'context/modalCtx'
 import { PhotoService } from '@services'
 import { getPhotos } from '@request'
 
-interface PhotosProps { 
-  initialPhotos: Photo[], 
+interface PhotosProps {
+  initialPhotos: Photo[],
   enableUpload?: boolean,
   session: Session
 }
@@ -34,7 +34,7 @@ export default function Photos({ initialPhotos, enableUpload = false, session }:
 
   return (
     <div className='container-page'>
-      
+
       <Header username={ session?.user?.name } imgUrl={session?.user?.image} />
 
       <main className='main'>
@@ -96,6 +96,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       redirect: {
         destination: '/log-in',
         permanent: false
+      }
+    }
+  }
+
+  const adminEmailsListStr = process.env.ADMIN_EMAILS_LIST
+  const adminEmailsList = adminEmailsListStr.split(',')
+  if (!adminEmailsList.includes(session.user?.email)) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
       }
     }
   }
